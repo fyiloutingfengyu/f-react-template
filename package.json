@@ -49,6 +49,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "@craco/types": "^7.1.0",
+    "craco-sass-resources-loader": "^1.1.0",
     "postcss-px-to-viewport-8-plugin": "^1.2.2"
   }
 }

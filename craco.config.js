@@ -1,4 +1,5 @@
 const path = require('path');
+const sassResourcesLoader = require('craco-sass-resources-loader');
 
 module.exports = {
   style: {
@@ -41,5 +42,13 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, './src')
     }
-  }
+  },
+  plugins: [
+    {
+      plugin: sassResourcesLoader,
+      options: {
+        resources: './src/styles/variables.scss'
+      },
+    },
+  ]
 };
