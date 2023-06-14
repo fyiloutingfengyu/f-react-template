@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import WrappedRoutes from './router/index';
+import TabBar from './components/tab-bar/index';
+import './app.scss';
 
 function App() {
+  let uLocation = useLocation();
+  const [urlPath, setUrlPath] = useState(uLocation.pathname);
+
+  // 监听路由变化
+  useEffect(() => {
+    setUrlPath(uLocation.pathname);
+  }, [uLocation]);
+
+  useEffect(() => {
+    console.log('最新 URL', urlPath);
+  }, [urlPath]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="base-layout">
+      <nav className="nav-bar">
+        <NavLink to="/">首页</NavLink>
+        <NavLink to="/my">我的</NavLink>
+      </nav>
+      <WrappedRoutes/>
+      <TabBar/>
     </div>
   );
 }
