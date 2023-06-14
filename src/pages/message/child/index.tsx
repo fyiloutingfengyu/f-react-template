@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-import testPic from '../../../assets/test_pic.jpg'
+import testPic from '@/assets/test_pic.jpg'
 
 const Child = () => {
   return (
