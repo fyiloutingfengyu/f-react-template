@@ -1,5 +1,41 @@
 const path = require('path');
 const sassResourcesLoader = require('craco-sass-resources-loader');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const isEnvProduction = process.env.NODE_ENV === 'production';
+let productionPlugins = [];
+// gzip 压缩
+const compressPlugin = new CompressionWebpackPlugin({
+  algorithm: 'gzip',
+  /*test: new RegExp(
+    '\\.(' +
+    ['js', 'css'].join('|') +
+    ')$'
+  ),
+  threshold: 1024,
+  minRatio: 0.8*/
+});
+
+const newTerserPlugin = new TerserPlugin({
+  terserOptions: {
+    compress: {
+      drop_debugger: true,
+      drop_console: true,
+      pure_funcs: ['console.log']
+    },
+    format: {
+      comments: false // 删除所有注释
+    }
+  },
+  parallel: true,  // 多核打包，提升打包速度
+  extractComments: false // 是否将注释全部集中到一个文件中
+});
+
+if (isEnvProduction) {
+  productionPlugins.push(newTerserPlugin, compressPlugin);
+  console.log('productionPlugins',productionPlugins);
+}
 
 module.exports = {
   style: {
@@ -39,6 +75,9 @@ module.exports = {
     },
   },
   webpack: {
+    plugins: [
+      ...productionPlugins
+    ],
     alias: {
       '@': path.resolve(__dirname, './src')
     }
@@ -50,5 +89,42 @@ module.exports = {
         resources: './src/styles/variables.scss'
       },
     },
-  ]
+  ],
+  // todo f
+  module: {
+    rules: [
+      {
+        test: /\.(jpg|png|jpeg|git)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 4096,
+          fallback: {
+            loader: 'file-loader',
+            options: {
+              name: 'img/[name].[hash:8].[ext]'
+            }
+          }
+        }
+      }
+    ],
+  },
+  devServer: {
+    compress: true,
+    hot: true,
+    historyApiFallback: true,
+    open: false,
+    port: 5001,
+    static: {
+      directory: path.resolve(__dirname, 'dist')
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5001',
+        pathRewrite: {
+          '^/api': '/api'
+        },
+        changeOrigin: true
+      }
+    }
+  }
 };
