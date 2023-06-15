@@ -24,8 +24,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set BROWSER=none&& craco start",
-    "build": "craco build",
+    "start": "set BROWSER=none&& dotenv -e .env.dev craco start",
+    "build": "dotenv -e .env.prod craco build",
+    "test-build": "dotenv -e .env.test craco build",
+    "analyzer": "dotenv -e .env.analyzer craco build",
     "preview": "serve -s build"
   },
   "eslintConfig": {
@@ -52,6 +54,7 @@
     "@craco/types": "^7.1.0",
     "craco-sass-resources-loader": "^1.1.0",
     "postcss-px-to-viewport-8-plugin": "^1.2.2",
-    "terser-webpack-plugin": "^5.3.9"
+    "terser-webpack-plugin": "^5.3.9",
+    "webpack-bundle-analyzer": "^4.9.0"
   }
 }

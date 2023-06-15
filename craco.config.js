@@ -2,6 +2,7 @@ const path = require('path');
 const sassResourcesLoader = require('craco-sass-resources-loader');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const isEnvProduction = process.env.NODE_ENV === 'production';
 let productionPlugins = [];
@@ -32,9 +33,19 @@ const newTerserPlugin = new TerserPlugin({
   extractComments: false // 是否将注释全部集中到一个文件中
 });
 
+// 打包分析
+const analyzerPlugin = new BundleAnalyzerPlugin({
+  analyzerMode: 'static', // 生成report.html文件
+  openAnalyzer: false, // 关闭自动在浏览器中打开报告
+});
+
 if (isEnvProduction) {
   productionPlugins.push(newTerserPlugin, compressPlugin);
-  console.log('productionPlugins',productionPlugins);
+  console.log('productionPlugins', productionPlugins);
+}
+
+if (process.env.ANALYZER_ENV) {
+  productionPlugins.push(analyzerPlugin);
 }
 
 module.exports = {
