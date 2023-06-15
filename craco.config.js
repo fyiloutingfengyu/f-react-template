@@ -3,6 +3,7 @@ const sassResourcesLoader = require('craco-sass-resources-loader');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const WebpackBar = require('webpackbar');
 
 const isEnvProduction = process.env.NODE_ENV === 'production';
 let productionPlugins = [];
@@ -86,6 +87,7 @@ module.exports = {
   },
   webpack: {
     plugins: [
+      new WebpackBar(),
       ...productionPlugins
     ],
     alias: {
