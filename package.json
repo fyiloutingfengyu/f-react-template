@@ -28,7 +28,7 @@
     "build": "dotenv -e .env.prod craco build",
     "test-build": "dotenv -e .env.test craco build",
     "analyzer": "dotenv -e .env.analyzer craco build",
-    "preview": "serve -s build"
+    "preview": "serve -s dist"
   },
   "eslintConfig": {
     "extends": [

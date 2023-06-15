@@ -41,7 +41,6 @@ const analyzerPlugin = new BundleAnalyzerPlugin({
 
 if (isEnvProduction) {
   productionPlugins.push(newTerserPlugin, compressPlugin);
-  console.log('productionPlugins', productionPlugins);
 }
 
 if (process.env.ANALYZER_ENV) {
@@ -91,6 +90,18 @@ module.exports = {
     ],
     alias: {
       '@': path.resolve(__dirname, './src')
+    },
+    configure: (webpackConfig, { env, paths }) => {
+      console.log('env', env);
+
+      paths.appBuild = 'dist'; // 修改打包输出文件目录,默认是build
+      webpackConfig.output = {
+        ...webpackConfig.output,
+        path: path.resolve(__dirname, 'dist'), // 修改打包输出文件目录
+        publicPath: '/'
+      };
+
+      return webpackConfig;
     }
   },
   plugins: [
