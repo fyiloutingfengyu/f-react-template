@@ -91,7 +91,7 @@ module.exports = {
       ...productionPlugins
     ],
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, 'src')
     },
     configure: (webpackConfig, { env, paths }) => {
       console.log('env', env);
