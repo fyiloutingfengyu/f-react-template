@@ -1,5 +1,5 @@
 // 封装 BrowserRouter 处理组件外使用路由跳转页面不更新的问题
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import type { History } from 'history';
 import type { BrowserRouterProps as NativeBrowserRouterProps } from 'react-router-dom';
 import { Router } from 'react-router-dom';
@@ -10,7 +10,6 @@ export interface BrowserRouterProps extends Omit<NativeBrowserRouterProps, 'wind
 
 const BrowserRouter: React.FC<BrowserRouterProps> = React.memo((props) => {
   const { history, ...restProps } = props;
-  console.log('000 BrowserRouter history', history);
   const [state, setState] = useState({
     action: history.action,
     location: history.location
@@ -21,7 +20,7 @@ const BrowserRouter: React.FC<BrowserRouterProps> = React.memo((props) => {
     // 调用setState后会触发组件重新渲染，从history对象中重新初始化最新的action 和 location
     // 在其他地方调用 history.push 等会触发 history.listen
     history.listen(setState);
-  }, []);
+  }, [history]);
 
   return <Router {...restProps} location={state.location} navigationType={state.action} navigator={history}/>;
 });
