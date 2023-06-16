@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './styles/main.scss';
@@ -8,6 +7,8 @@ import './index.scss';
 import Reducers from './redux/reducers';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import history from '@/router/history';
+import BrowserRouter from '@/router/browser-router';
 
 if (process.env.REACT_APP_ENV === 'mock') {
   require('./mock');
@@ -23,7 +24,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <App/>
       </BrowserRouter>
     </Provider>

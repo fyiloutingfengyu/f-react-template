@@ -8,7 +8,7 @@ import { removeLocalStorage, getLocalStorage } from './common';
 import { ignoreTokenUrl } from '@/api/ignore-token';
 import { STORAGE_NAME } from './constant';
 import { API_BASE_URL } from '@/config';
-import history from './history';
+import history from '../router/history';
 import { showFailToast } from './package-antd-mobile';
 
 axios.defaults.baseURL = API_BASE_URL;
