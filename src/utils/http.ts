@@ -2,14 +2,14 @@
  * @description: 公共请求拦截器版
  */
 import axios from 'axios';
-import { Toast } from 'antd-mobile';
-import { HttpOptions, LoadingObj } from '@/interface/common';
+import { Toast, ToastShowProps } from 'antd-mobile';
+import { HttpOptions } from '@/interface/common';
 import { removeLocalStorage, getLocalStorage } from './common';
 import { ignoreTokenUrl } from '@/api/ignore-token';
 import { STORAGE_NAME } from './constant';
 import { API_BASE_URL } from '@/config';
 import history from './history';
-import { showFailToast, showLoadingToast } from './package-antd-mobile';
+import { showFailToast } from './package-antd-mobile';
 
 axios.defaults.baseURL = API_BASE_URL;
 // 请求超时时间
@@ -160,17 +160,15 @@ const http = (options: HttpOptions) => {
               gotoLogin();
               break;
             case 500:
-              showFailToast(error.response.data.message);
+              showFailToast(error.response.data.message || error.message);
               break;
             default:
               if (process.env.NODE_ENV !== 'production') {
-                showFailToast(error.response.data.message);
+                showFailToast(error.response.data.message || error.message);
               } else {
                 showFailToast('服务异常，请稍后再试！');
               }
           }
-        } else if (error.request) {
-          showFailToast(error.message);
         } else {
           showFailToast(error.message);
         }
@@ -207,12 +205,9 @@ const http = (options: HttpOptions) => {
       options.flag = flag;
     }
 
-    const loadingObj: LoadingObj = {
-      duration: 0, // 持续展示 toast
-      message: '加载中...',
-      forbidClick: true,
-      loadingType: 'spinner',
-      overlay: false
+    const loadingObj: ToastShowProps = {
+      content: '加载中...',
+      duration: 0 // 持续展示 toast
     };
 
     // 添加loading
@@ -223,7 +218,7 @@ const http = (options: HttpOptions) => {
         Object.assign(loadingObj, loadingConfig);
       }
 
-      showLoadingToast(loadingObj);
+      Toast.show(loadingObj);
     }
 
     interface Config {

@@ -27,6 +27,7 @@
   },
   "scripts": {
     "start": "set BROWSER=none&& dotenv -e .env.dev craco start",
+    "mock": "dotenv -e .env.mock craco start",
     "build": "dotenv -e .env.prod craco build",
     "test-build": "dotenv -e .env.test craco build",
     "analyzer": "dotenv -e .env.analyzer craco build",
@@ -54,7 +55,10 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "@craco/types": "^7.1.0",
+    "@types/mockjs": "^1.0.7",
+    "@types/webpack-env": "^1.18.1",
     "craco-sass-resources-loader": "^1.1.0",
+    "mockjs": "^1.1.0",
     "postcss-px-to-viewport-8-plugin": "^1.2.2",
     "terser-webpack-plugin": "^5.3.9",
     "webpack-bundle-analyzer": "^4.9.0",

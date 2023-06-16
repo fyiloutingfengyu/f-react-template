@@ -14,7 +14,7 @@ const my = () => {
         pwd: '123'
       }
     }).then(res => {
-      console.log(res);
+      console.log('http login',res);
     }).catch(err => {
       console.log(err);
     });
