@@ -100,7 +100,10 @@ module.exports = {
       webpackConfig.output = {
         ...webpackConfig.output,
         path: path.resolve(__dirname, 'dist'), // 修改打包输出文件目录
-        publicPath: '/'
+        publicPath: '/',
+        filename: 'static/js/[name].[contenthash:8].js',
+        chunkFilename: 'static/js/[name].[contenthash:8].js',
+        assetModuleFilename: 'static/media/[name].[contenthash:8].[ext]'
       };
 
       return webpackConfig;
@@ -114,24 +117,6 @@ module.exports = {
       },
     },
   ],
-  // todo f
-  module: {
-    rules: [
-      {
-        test: /\.(jpg|png|jpeg|git)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 4096,
-          fallback: {
-            loader: 'file-loader',
-            options: {
-              name: 'img/[name].[hash:8].[ext]'
-            }
-          }
-        }
-      }
-    ],
-  },
   devServer: {
     compress: true,
     hot: true,
