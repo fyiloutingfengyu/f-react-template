@@ -32,7 +32,7 @@ function render(props: { container?: Element }) {
       <Provider store={store}>
         <BrowserRouter
           history={history}
-          basename="/sub-react"
+          basename={process.env.PUBLIC_URL}
         >
           <App/>
         </BrowserRouter>
