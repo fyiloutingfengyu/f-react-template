@@ -17,7 +17,7 @@ const Home = (props: { actions?: any; isLoading?: any; }) => {
 
   useEffect(() => {
     props.actions.startLoading();
-  }, []);
+  }, [props.actions]);
 
   const { isLoading } = props;
   console.log('isLoading', isLoading);

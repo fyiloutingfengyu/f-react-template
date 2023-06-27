@@ -108,6 +108,12 @@ module.exports = {
         chunkLoadingGlobal: `webpackChunk${packageName}`
       };
 
+      webpackConfig.devServer = {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      };
+
       console.log('111 webpackConfig', webpackConfig);
       return webpackConfig;
     }
