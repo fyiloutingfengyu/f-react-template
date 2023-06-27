@@ -4,6 +4,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const WebpackBar = require('webpackbar');
+const packageName = require('./package.json').name;
 
 const isEnvProduction = process.env.NODE_ENV === 'production';
 let productionPlugins = [];
@@ -94,18 +95,20 @@ module.exports = {
       '@': path.resolve(__dirname, 'src')
     },
     configure: (webpackConfig, { env, paths }) => {
-      console.log('env', env);
-
       paths.appBuild = 'dist'; // 修改打包输出文件目录,默认是build
       webpackConfig.output = {
         ...webpackConfig.output,
         path: path.resolve(__dirname, 'dist'), // 修改打包输出文件目录
-        publicPath: '/',
+        // publicPath: '/',
         filename: 'static/js/[name].[contenthash:8].js',
         chunkFilename: 'static/js/[name].[contenthash:8].js',
-        assetModuleFilename: 'static/media/[name].[contenthash:8].[ext]'
+        assetModuleFilename: 'static/media/[name].[contenthash:8].[ext]',
+        library: `${packageName}-[name]`,
+        libraryTarget: 'umd',
+        chunkLoadingGlobal: `webpackChunk${packageName}`
       };
 
+      console.log('111 webpackConfig', webpackConfig);
       return webpackConfig;
     }
   },
