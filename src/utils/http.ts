@@ -57,7 +57,7 @@ const removeUrlCache = (options: HttpOptions) => {
   if (urlArr[url]) {
     for (const i in urlArr[url]) {
       // todo f
-      if (urlArr[url][i] == options.flag) {
+      if (urlArr[url][i] === options.flag) {
         delete urlArr[url][i];
         break;
       }

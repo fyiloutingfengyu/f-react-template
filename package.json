@@ -4,6 +4,7 @@
   "description": "{{description}}",
   "author": "{{author}}",
   "scripts": {
+    "dev": "npm start",
     "start": "set BROWSER=none&& dotenv -e .env.dev craco start",
     "mock": "dotenv -e .env.mock craco start",
     "build": "dotenv -e .env.prod craco build",

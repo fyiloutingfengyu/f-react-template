@@ -1,10 +1,12 @@
 /**
  * @desc 登录相关的接口
  */
-export default {
+const loginApi = {
   // 登录
   login: {
     url: '/api/login',
     method: 'post'
   }
-}
+};
+
+export { loginApi };
