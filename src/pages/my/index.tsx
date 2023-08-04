@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd-mobile';
 import './index.scss';
-import { http } from '@/utils/http';
+import http from '@/utils/http';
 import { loginApi } from '@/api/login';
 import history from '@/router/history';
 
