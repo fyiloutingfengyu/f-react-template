@@ -12,11 +12,6 @@ import { API_BASE_URL } from '@/config';
 import history from '../router/history';
 import { showFailToast } from './package-antd-mobile';
 
-const request = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 30000
-});
-
 const urlArr: UrlArr = {};
 let count = 0;
 
@@ -131,6 +126,11 @@ const http = (options: HttpOptions) => {
     gotoLogin();
     return Promise.reject();
   }
+
+  const request = axios.create({
+    baseURL: API_BASE_URL,
+    timeout: 30000
+  });
 
   request.interceptors.request.use(
     (config) => {
