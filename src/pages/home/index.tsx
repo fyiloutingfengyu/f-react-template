@@ -17,6 +17,7 @@ const Home = (props: { actions?: any; isLoading?: any; }) => {
 
   useEffect(() => {
     props.actions.startLoading();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { isLoading } = props;
