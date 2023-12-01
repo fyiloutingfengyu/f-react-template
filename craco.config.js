@@ -1,5 +1,4 @@
 const path = require('path');
-const sassResourcesLoader = require('craco-sass-resources-loader');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -50,6 +49,29 @@ if (process.env.ANALYZER_ENV) {
 
 module.exports = {
   style: {
+    sass: {
+      loaderOptions: {
+        additionalData: (content, loaderContext) => {
+          const { resourcePath, rootContext } = loaderContext;
+
+          // 获取当前scss文件的相对路径，并将路径中的‘\’转换为‘/’
+          const relativePath = path.relative(rootContext, resourcePath)
+            .split(path.sep)
+            .join('/');
+
+          // 全局scss文件
+          const filesToImport = ['src/styles/variables.scss'];
+
+          if (/\.scss$/.test(relativePath) && !filesToImport.includes(relativePath)) {
+            const importStatements = filesToImport.map(file => `@import "${file.replace('src', '@')}";`).join('\n');
+
+            return `${importStatements}\n${content}`;
+          } else {
+            return content;
+          }
+        },
+      }
+    },
     postcss: {
       mode: 'extends',
       loaderOptions: {
@@ -109,14 +131,6 @@ module.exports = {
       return webpackConfig;
     }
   },
-  plugins: [
-    {
-      plugin: sassResourcesLoader,
-      options: {
-        resources: './src/styles/variables.scss'
-      },
-    },
-  ],
   devServer: {
     compress: true,
     hot: true,

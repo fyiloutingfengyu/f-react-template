@@ -25,6 +25,7 @@ const Home = (props: { actions?: any; isLoading?: any; }) => {
 
   return (
     <div className="container">
+      <div className="title">home</div>
       <Button color="primary"
               className="rotation test-btn"
               onClick={() => test()}

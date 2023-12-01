@@ -1,5 +1,5 @@
 {
-  "name": "{{name}}",
+  "name": "f-react-template",
   "version": "1.0.0",
   "description": "{{description}}",
   "author": "{{author}}",
@@ -59,12 +59,14 @@
     "@craco/types": "^7.1.0",
     "@types/mockjs": "^1.0.7",
     "@types/webpack-env": "^1.18.1",
-    "craco-sass-resources-loader": "^1.1.0",
     "mini-css-extract-plugin": "^2.7.6",
     "mockjs": "^1.1.0",
     "postcss-px-to-viewport-8-plugin": "^1.2.2",
     "terser-webpack-plugin": "^5.3.9",
     "webpack-bundle-analyzer": "^4.9.0",
     "webpackbar": "^5.0.2"
+  },
+  "engines": {
+    "node": ">=16.18.0"
   }
 }

@@ -1,4 +1,9 @@
 .container {
+  .title {
+    margin-bottom: 50px;
+    color: $font-color-main;
+  }
+
   .test-btn {
     display: block;
     width: 120px;
