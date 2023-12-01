@@ -1,22 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './styles/main.scss';
 import './index.scss';
-import Reducers from './redux/reducers';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import history from '@/router/history';
 import BrowserRouter from '@/router/browser-router';
+import { store } from '@/redux/store';
 
 if (process.env.REACT_APP_ENV === 'mock') {
   require('./mock');
 }
-
-const store = createStore(
-  Reducers
-);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
