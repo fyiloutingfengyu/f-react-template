@@ -8,7 +8,7 @@ const login = {
   method: 'post',
   response: () => {
     return {
-      'code': 200,
+      'code': 401,
       'message': '请求成功',
       'data': {
         'user': {

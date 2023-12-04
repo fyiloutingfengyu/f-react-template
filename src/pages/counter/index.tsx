@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
@@ -8,13 +8,26 @@ import {
   incrementAsync1,
   incrementIfOdd,
   selectCount,
-  selectCount1
+  selectCount1,
+  getData
 } from '@/redux/features/counter/counterSlice';
 import styles from './counter.module.scss';
+import { showFailToast } from '@/utils/package-antd-mobile';
 
 export default function Counter() {
   const count = useSelector(selectCount);
   const count1 = useSelector(selectCount1);
+  // todo f
+  const data = useSelector(getData);
+
+  // todo f
+  useEffect(() => {
+    if (data.code !== 200) {
+      console.log(678, data);
+      showFailToast(data.message);
+    }
+  }, [data]);
+
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
 

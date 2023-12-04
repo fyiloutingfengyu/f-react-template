@@ -175,14 +175,22 @@ const http = (options: HttpOptions) => {
         return response;
       } else {
         // 自动处理接口返回的错误
-        switch (response.data.code) {
-          case 200:
-            console.log('接口返回的数据', response.data);
-            return response.data;
-          default:
-            showFailToast(response.data.message);
-            return response.data;
+
+        const defaultErrorMessage = '服务异常，请稍后再试！';
+
+        if (response.data) {
+          switch (response.data.code) {
+            case 200:
+              console.log('接口返回的数据', response.data);
+              return response.data;
+            default:
+              showFailToast(response.data.message);
+          }
+        } else {
+          showFailToast(defaultErrorMessage);
         }
+
+        return Promise.reject(defaultErrorMessage);
       }
     },
     (error) => {
