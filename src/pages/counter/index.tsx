@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
@@ -19,12 +19,18 @@ export default function Counter() {
   const count1 = useSelector(selectCount1);
   // todo f
   const data = useSelector(getData);
-
+  console.log(677, data);
+  const initPageRef = useRef<boolean>();
   // todo f
   useEffect(() => {
-    if (data.code !== 200) {
-      console.log(678, data);
-      showFailToast(data.message);
+    // 非页面初始化时才对数据进行操作
+    if (initPageRef.current) {
+      if (data.code !== 200) {
+        console.log(678, data);
+        showFailToast(data.message);
+      }
+    } else {
+      initPageRef.current = true;
     }
   }, [data]);
 
