@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { AnyAction, bindActionCreators, Dispatch } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd-mobile';
-import * as commonAction from '../../redux/actions/common';
 import './index.scss';
-
+import { startLoading } from '@/redux/features/common/commonSlice';
 import { useNavigate } from 'react-router-dom';
 
-const Home = (props: { actions?: any; isLoading?: any; }) => {
+const Home = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state: any) => {
+    console.log(51,state);
+    return state.common.isLoading;
+  });
+
   const navigate = useNavigate();
   console.log(666, process.env.NODE_ENV);
 
@@ -16,12 +20,10 @@ const Home = (props: { actions?: any; isLoading?: any; }) => {
   };
 
   useEffect(() => {
-    props.actions.startLoading();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(startLoading());
+  }, [dispatch]);
 
-  const { isLoading } = props;
-  console.log('isLoading', isLoading);
+  console.log('8', isLoading);
 
   return (
     <div className="container">
@@ -34,16 +36,4 @@ const Home = (props: { actions?: any; isLoading?: any; }) => {
   );
 };
 
-const mapStateToProps = (state: { common: any; }) => {
-  return { ...state.common };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
-  return {
-    // 通过 bindActionCreators 将actions包装成可以直接被调用的函数
-    // todo f
-    actions: bindActionCreators(commonAction as any, dispatch)
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

@@ -16,8 +16,6 @@ import { showFailToast } from '@/utils/package-antd-mobile';
 
 export default function Counter() {
   const count = useSelector(selectCount);
-  const count1 = useSelector(selectCount1);
-  // todo f
   const data = useSelector(getData);
   console.log(677, data);
   const initPageRef = useRef<boolean>();
@@ -36,7 +34,6 @@ export default function Counter() {
 
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
-
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
@@ -58,11 +55,6 @@ export default function Counter() {
           +
         </button>
       </div>
-
-      <div className={styles.row}>
-        <span className={styles.value}>{count1}</span>
-      </div>
-
       <div className={styles.row}>
         <input
           className={styles.textbox}
