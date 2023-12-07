@@ -7,6 +7,7 @@ const Message = lazy(() => import('../pages/message/index'));
 const MessageChild = lazy(() => import('../pages/message/child/index'));
 const My = lazy(() => import('../pages/my/index'));
 const Counter = lazy(() => import('../pages/counter/index'));
+const Test = lazy(() => import('../pages/test/test'));
 const NotFound = lazy(() => import('../pages/not-found/index'));
 
 // 渲染懒加载路由
@@ -45,8 +46,12 @@ let routes = [
     element: lazyElement(<My/>)
   },
   {
-    path:'/counter',
-    element:lazyElement(<Counter/>)
+    path: '/counter',
+    element: lazyElement(<Counter/>)
+  },
+  {
+    path:'/test',
+    element:lazyElement(<Test/>)
   },
   {
     path: '*',

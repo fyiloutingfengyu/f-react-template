@@ -30,12 +30,10 @@ const tabs = [
 const CustomTabBar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log('navigate', navigate);
   console.log('pathname', pathname);
 
   // 切换tab
   const changeTab = (value: To) => {
-    console.log(888, value);
     navigate(value);
   };
 

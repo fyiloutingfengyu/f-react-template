@@ -172,6 +172,7 @@ const http = (options: HttpOptions) => {
 
       if (options.isManualDealError) {
         // 手动接口返回的处理错误
+        console.log('后台返回完整数据', response);
         return response;
       } else {
         // 自动处理接口返回的错误
@@ -194,6 +195,7 @@ const http = (options: HttpOptions) => {
       }
     },
     (error) => {
+      console.log('http 异常', error);
       removeUrlCache(options);
       Toast.clear();
 
