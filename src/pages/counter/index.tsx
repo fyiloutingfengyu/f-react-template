@@ -5,7 +5,6 @@ import {
   increment,
   incrementByAmount,
   incrementAsync,
-  incrementAsync1,
   incrementIfOdd,
   selectCount,
   getData
@@ -78,12 +77,6 @@ export default function Counter() {
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
         >
           Add If Odd
-        </button>
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync1(incrementValue))}
-        >
-          Add Async 1
         </button>
       </div>
     </div>

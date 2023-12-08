@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import http from '@/utils/http';
-import { loginApi } from '@/api/login';
 
 export interface CounterState {
   value: number;
@@ -26,26 +24,6 @@ const fetchCount = (amount = 1) => {
   });
 };
 
-const fetchCount1 = (amount = 1) => {
-  return new Promise((resolve, reject) => {
-    http({
-      url: loginApi.login.url,
-      method: loginApi.login.method,
-      params: {
-        mobilePhone: '18888888888',
-        pwd: '123'
-      },
-      isManualDealError: true
-    }).then(res => {
-      console.log('http login 6', res);
-      resolve(res);
-    }).catch(err => {
-      console.log(err);
-      reject(err);
-    });
-  });
-};
-
 // todo f
 export const incrementAsync: any = createAsyncThunk(
   'counter/fetchCount',
@@ -55,20 +33,6 @@ export const incrementAsync: any = createAsyncThunk(
 
     // @ts-ignore
     return response.data;
-  }
-);
-
-export const incrementAsync1: any = createAsyncThunk(
-  'counter/fetchCount1',
-  async (amount: number) => {
-    try {
-      const response = await fetchCount1(amount);
-
-      // @ts-ignore
-      return response.data;
-    } catch (err: any) {
-      throw new Error(err);
-    }
   }
 );
 
@@ -97,20 +61,7 @@ export const counterSlice = createSlice({
       })
       .addCase(incrementAsync.rejected, (state) => {
         state.status = 'failed';
-      })
-      .addCase(incrementAsync1.fulfilled, (state, action) => {
-        console.log(6, 'incrementAsync1');
-        state.status = 'idle';
-        state.value1 += action.payload;
-        console.log('1 fulfilled', action.payload);
-        state.data = action.payload;
-      })
-      .addCase(incrementAsync1.rejected, (state, action) => {
-        state.status = 'failed';
-        console.log('1 failed', action);
-        console.log('1 failed error', action.error.message);
-      })
-    ;
+      });
   }
 });
 
