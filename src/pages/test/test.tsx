@@ -10,16 +10,19 @@ export default function Test() {
   const [goodsDetail, setGoodsDetail] = useState<any>({});
   const dispatch = useDispatch();
   const goodsData = useSelector((state: any) => {
+    console.log(11, state.test.goodsData);
     return state.test.goodsData;
   });
+
   const detailData = useSelector((state: any) => {
+    console.log(21, state.test.goodsDetail);
     return state.test.goodsDetail;
   });
 
-  useEffect(() => {
+  /*useEffect(() => {
     const counter = setInterval(() => {
       setCount(c => {
-          if (c >= 10) {
+          if (c >= 2) {
             clearInterval(counter);
           }
 
@@ -31,7 +34,7 @@ export default function Test() {
     // componentWillUnmount
     return () => clearInterval(counter);
   }, []);
-
+*/
   // todo f useReducer
 
   useEffect(() => {
@@ -39,6 +42,7 @@ export default function Test() {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log(12, goodsData);
     if (goodsData.code === 200) {
       setGoodsList(() => {
         return goodsData.data;
@@ -50,6 +54,7 @@ export default function Test() {
   }, [goodsData]);
 
   useEffect(() => {
+    console.log(22, detailData);
     if (detailData.status === 500) {
       showFailToast(detailData.message);
     } else {
