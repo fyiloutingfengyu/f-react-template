@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getGoodsListAsync, getGoodsDetailAsync } from '@/redux/features/test/testSlice';
+import { getGoodsListAsync } from '@/redux/features/test/testSlice';
 import styles from './test.module.scss';
 import { showFailToast } from '@/utils/package-antd-mobile';
+import { getGoodsDetail } from '@/api/test';
 
 export default function Test() {
-  const [count, setCount] = useState(0);
   const [goodsList, setGoodsList] = useState([]);
   const [goodsDetail, setGoodsDetail] = useState<any>({});
   const dispatch = useDispatch();
@@ -14,29 +14,7 @@ export default function Test() {
     return state.test.goodsData;
   });
 
-  const detailData = useSelector((state: any) => {
-    console.log(21, state.test.goodsDetail);
-    return state.test.goodsDetail;
-  });
-
-  /*useEffect(() => {
-    const counter = setInterval(() => {
-      setCount(c => {
-          if (c >= 2) {
-            clearInterval(counter);
-          }
-
-          return c + 1;
-        }
-      );
-    }, 1000);
-
-    // componentWillUnmount
-    return () => clearInterval(counter);
-  }, []);
-*/
   // todo f useReducer
-
   useEffect(() => {
     dispatch(getGoodsListAsync());
   }, [dispatch]);
@@ -53,19 +31,25 @@ export default function Test() {
 
   }, [goodsData]);
 
-  useEffect(() => {
-    console.log(22, detailData);
-    if (detailData.status === 500) {
-      showFailToast(detailData.message);
-    } else {
-      console.log('666detailData', detailData);
-      if (detailData.code === 200) {
-        setGoodsDetail(detailData.data);
+  // 获取商品详情
+  const getGoodsDetailInfo = (id: string) => {
+    getGoodsDetail({
+      isManualDealError: true,
+      isManualDealHttpError: true,
+      params: {
+        id: id
+      }
+    }).then(res => {
+      console.log(666, res);
+      if (res.data.code === 200) {
+        setGoodsDetail(res.data.data);
       } else {
         showFailToast('后台接口返回错误');
       }
-    }
-  }, [detailData]);
+    }).catch(err => {
+      showFailToast(err.message);
+    });
+  };
 
   const list = (list: any[]) => {
     let goods = [];
@@ -74,7 +58,7 @@ export default function Test() {
         <li
           className={styles.goodsItem}
           key={list[i].id}
-          onClick={() => dispatch(getGoodsDetailAsync(list[i].id))}
+          onClick={() => getGoodsDetailInfo(list[i].id)}
         >
           {list[i].title}
         </li>
@@ -86,7 +70,6 @@ export default function Test() {
 
   return (
     <div className={styles.testPage}>
-      <div>{count}</div>
       {list(goodsList)}
       <div>
         <div>{goodsDetail.title}</div>
