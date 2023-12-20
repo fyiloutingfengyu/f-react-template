@@ -6,10 +6,9 @@ import { showFailToast } from '@/utils/package-antd-mobile';
 import { getGoodsDetail } from '@/api/test';
 
 export default function Test() {
-  const [goodsList, setGoodsList] = useState([]);
   const [goodsDetail, setGoodsDetail] = useState<any>({});
   const dispatch = useDispatch();
-  const goodsData = useSelector((state: any) => {
+  const goodsList = useSelector((state: any) => {
     console.log(11, state.test.goodsData);
     return state.test.goodsData;
   });
@@ -18,18 +17,6 @@ export default function Test() {
   useEffect(() => {
     dispatch(getGoodsListAsync());
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log(12, goodsData);
-    if (goodsData.code === 200) {
-      setGoodsList(() => {
-        return goodsData.data;
-      });
-    } else {
-      showFailToast(goodsData.message);
-    }
-
-  }, [goodsData]);
 
   // 获取商品详情
   const getGoodsDetailInfo = (id: string) => {
