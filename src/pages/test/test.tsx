@@ -13,7 +13,6 @@ export default function Test() {
     return state.test.goodsData;
   });
 
-  // todo f useReducer
   useEffect(() => {
     dispatch(getGoodsListAsync());
   }, [dispatch]);
