@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGoodsListAsync } from '@/redux/features/test/testSlice';
 import styles from './test.module.scss';
@@ -7,11 +7,19 @@ import { getGoodsDetail } from '@/api/test';
 
 export default function Test() {
   const [goodsDetail, setGoodsDetail] = useState<any>({});
+  const [count, setCount] = useState(0);
+
+  const countRef = useRef(0);
+
   const dispatch = useDispatch();
   const goodsList = useSelector((state: any) => {
     console.log(11, state.test.goodsData);
     return state.test.goodsData;
   });
+
+  useEffect(() => {
+    console.log('new count', count);
+  }, [count]);
 
   useEffect(() => {
     dispatch(getGoodsListAsync());
@@ -54,6 +62,16 @@ export default function Test() {
     return <ul className={styles.goodsList}>{goods}</ul>;
   };
 
+  const updateState = () => {
+    setCount(value => {
+      console.log('prev value', value);
+      return value + 1;
+    });
+
+    countRef.current += 1;
+    console.log('countRef.current', countRef.current);
+  };
+
   return (
     <div className={styles.testPage}>
       {list(goodsList)}
@@ -61,6 +79,12 @@ export default function Test() {
         <div>{goodsDetail.title}</div>
         <div>{goodsDetail.price}</div>
       </div>
+      <button
+        type="button"
+        onClick={() => updateState()}
+      >
+        update
+      </button>
     </div>
   );
 }
