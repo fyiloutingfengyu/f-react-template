@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGoodsListAsync } from '@/redux/features/test/testSlice';
 import styles from './test.module.scss';
-import { showFailToast } from '@/utils/package-antd-mobile';
+import { showFailToast } from '@/utils/wrap-antd-mobile';
 import { getGoodsDetail } from '@/api/test';
 
 export default function Test() {

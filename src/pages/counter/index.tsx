@@ -10,7 +10,7 @@ import {
   getData
 } from '@/redux/features/counter/counterSlice';
 import styles from './counter.module.scss';
-import { showFailToast } from '@/utils/package-antd-mobile';
+import { showFailToast } from '@/utils/wrap-antd-mobile';
 
 export default function Counter() {
   const count = useSelector(selectCount);

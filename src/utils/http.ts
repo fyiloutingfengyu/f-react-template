@@ -7,10 +7,10 @@ import { HttpOptions } from '@/interface/common';
 import { UrlArr, HeadersObj, AxiosConfig } from '@/interface/http';
 import { removeLocalStorage, getLocalStorage } from './common';
 import { ignoreTokenUrl } from '@/api/ignore-token';
-import { STORAGE_NAME } from './constant';
+import {STORAGE_NAME} from '@/constants/common'
 import { API_BASE_URL } from '@/config';
-import history from '../router/history';
-import { showFailToast } from './package-antd-mobile';
+import history from '@/router/history';
+import { showFailToast } from './wrap-antd-mobile';
 
 const urlArr: UrlArr = {};
 let count = 0;
