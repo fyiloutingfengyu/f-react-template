@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd-mobile';
 import './index.scss';
-import { startLoading } from '@/redux/features/common/commonSlice';
+import { startLoading } from '@/store/commonSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {

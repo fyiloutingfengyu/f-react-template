@@ -8,7 +8,7 @@ import {
   incrementIfOdd,
   selectCount,
   getData
-} from '@/redux/features/counter/counterSlice';
+} from '@/store/counterSlice';
 import styles from './counter.module.scss';
 import { showFailToast } from '@/utils/wrap-antd-mobile';
 

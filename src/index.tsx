@@ -7,7 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import history from '@/router/history';
 import BrowserRouter from '@/router/browser-router';
-import { store } from '@/redux/store';
+import { store } from '@/store';
 
 if (process.env.REACT_APP_ENV === 'mock') {
   require('./mock');
