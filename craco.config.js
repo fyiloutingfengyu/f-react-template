@@ -103,7 +103,8 @@ module.exports = {
         filename: 'static/js/[name].[contenthash:8].js',
         chunkFilename: 'static/js/[name].[contenthash:8].js',
         assetModuleFilename: 'static/media/[name].[contenthash:8].[ext]',
-        library: `${packageName}-[name]`,
+        // 微应用包名（与主应用中注册的包名一致）
+        library: 'sub-react',
         libraryTarget: 'umd',
         chunkLoadingGlobal: `webpackChunk${packageName}`
       };

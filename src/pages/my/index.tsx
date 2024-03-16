@@ -28,6 +28,10 @@ const my = () => {
     });
   };
 
+  const toVueChild = () => {
+    window.history.pushState(null, '', '/sub-vue')
+  }
+
   return (
     <div>
       <h3>my</h3>
@@ -41,10 +45,12 @@ const my = () => {
       <Button
         className="test-btn"
         color="default"
+        size="large"
         onClick={() => toMessagePage()}
       >
         to message
       </Button>
+      <Button onClick={()=>toVueChild()}>to vue 子应用</Button>
     </div>
   );
 };
