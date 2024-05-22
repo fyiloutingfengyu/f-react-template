@@ -7,7 +7,7 @@ import { HttpOptions } from '@/interface/common';
 import { UrlArr, HeadersObj, AxiosConfig } from '@/interface/http';
 import { removeLocalStorage, getLocalStorage } from './common';
 import { ignoreTokenUrl } from '@/api/ignore-token';
-import {STORAGE_NAME} from '@/constants/common'
+import { STORAGE_NAME } from '@/constants/common';
 import { API_BASE_URL } from '@/config';
 import history from '@/router/history';
 import { showFailToast } from './wrap-antd-mobile';
@@ -80,13 +80,8 @@ const http = (options: HttpOptions) => {
 
   const headersObj: HeadersObj = {
     'Content-Type': getContentType(options.type),
-    Authorization: ''
+    Authorization: accessToken || ''
   };
-
-  // 设置token
-  if (accessToken) {
-    headersObj.Authorization = accessToken;
-  }
 
   // 不需要校验token的接口删除 headers中的Authorization
   for (let index = 0; index < ignoreTokenUrl.length; index++) {
