@@ -91,13 +91,8 @@ const http = (options: HttpOptions) => {
 
   const headersObj: HeadersObj = {
     'Content-Type': getContentType(options.type),
-    Authorization: ''
+    Authorization: accessToken || ''
   };
-
-  // 设置token
-  if (accessToken) {
-    headersObj.Authorization = accessToken;
-  }
 
   // 不需要校验token的接口删除 headers中的Authorization
   for (let index = 0; index < ignoreTokenUrl.length; index++) {
