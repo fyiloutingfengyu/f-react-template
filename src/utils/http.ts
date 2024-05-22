@@ -9,7 +9,7 @@ import { ignoreTokenUrl } from '@/api/ignore-token';
 import { STORAGE_NAME } from './constant';
 import { API_BASE_URL } from '@/config';
 import history from '../router/history';
-import { showFailToast } from './package-antd-mobile';
+import { showFailToast } from './wrap-antd-mobile';
 
 axios.defaults.baseURL = API_BASE_URL;
 // 请求超时时间
