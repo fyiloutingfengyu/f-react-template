@@ -6,23 +6,11 @@ const initialState = {
 };
 
 // 获取商品列表
-const fetchGoodsList = () => {
-  return new Promise((resolve, reject) => {
-    getGoodsList().then(res => {
-      console.log(res);
-      resolve(res);
-    }).catch(err => {
-      console.log(err);
-      reject(err);
-    });
-  });
-};
-
 export const getGoodsListAsync: any = createAsyncThunk(
   'test/goodsList',
   async () => {
     try {
-      const response: any = await fetchGoodsList();
+      const response: any = await getGoodsList();
 
       return response.data;
     } catch (err: any) {

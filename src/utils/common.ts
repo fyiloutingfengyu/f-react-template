@@ -127,9 +127,9 @@ const getDataType = (data: any) => {
     const typeStr = Object.prototype.toString.call(data);
 
     return typeStr.slice(8, -1).toLowerCase();
+  } else {
+    return type;
   }
-
-  return type;
 };
 
 export {

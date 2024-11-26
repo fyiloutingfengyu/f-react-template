@@ -13,7 +13,8 @@ const Home = () => {
   });
 
   const navigate = useNavigate();
-  console.log(666, process.env.NODE_ENV);
+  console.log('1-NODE_ENV', process.env.NODE_ENV);
+  console.log('2-REACT_APP_ENV',process.env.REACT_APP_ENV);
 
   const test = () => {
     navigate('/my');
